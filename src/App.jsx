@@ -15,11 +15,23 @@ export const App = () => {
     setTodoText("");
   };
 
+
+  // (index)でindexを受け取る
   const onClickDelete = (index) => {
     const newTodos = [...incompleteTodos];
     // 引数で受け取ったindex番号の要素を一つ削除する
     newTodos.splice(index, 1);
     setCompleteTodos(newTodos);
+  };
+
+  const onClickComplete = (index) => {
+    const newIncompleteTodos = [...incompleteTodos];
+    // 引数で受け取ったindex番号の要素を一つ削除する
+    newIncompleteTodos.splice(index, 1);
+    
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+    setIncompleteTodos(newCompleteTodos);
   };
 
   return (
@@ -36,7 +48,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickComplete(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
